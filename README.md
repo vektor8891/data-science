@@ -6,4 +6,4 @@ Collection of data science projects.
 
 **Tags**: CART, Random Forest, Cross-Validation, ROC Curve
 
-**Summary**: Predict heart failure to heart failure based on medical conditions.
+**Summary**: Predict heart failure based on medical conditions.
