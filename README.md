@@ -2,7 +2,7 @@
 
 Collection of data science projects.
 
-## 1. Heart Failure
+## 1. [Heart Failure](01_HeartFailure/README.md)
 
 **Tags**: CART, Random Forest, Cross-Validation, ROC Curve
 
