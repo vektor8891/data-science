@@ -1,8 +1,7 @@
 ---
 title: "Heart Failure Prediction"
 author: "Viktor Szabo"
-date: '2021 04 02 '
-output: html_document
+output: rmarkdown::github_document
 ---
 
 ```{r setup, include=FALSE}
