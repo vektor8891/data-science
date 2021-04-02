@@ -1,10 +1,10 @@
 ---
 title: "Heart Failure Prediction"
 author: "Viktor Szabo"
-output:
-  md_document:
-    variant: markdown_github
+output: rmarkdown::github_document
 ---
+
+In this analysis, I make an attempt to predict heart rate failures based on various medical data. Using various statistical methods - like CART and random forest - I managed to improve the baseline accuracy (0.68) to 0.79.
 
 ## Read in the data
 

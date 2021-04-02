@@ -2,6 +2,11 @@ Heart Failure Prediction
 ================
 Viktor Szabo
 
+In this analysis, I make an attempt to predict heart rate failures based
+on various medical data. Using various statistical methods - like CART
+and random forest - I managed to improve the baseline accuracy (0.68) to
+0.79.
+
 ## Read in the data
 
 Source: <https://www.kaggle.com/andrewmvd/heart-failure-clinical-data>
@@ -55,6 +60,7 @@ prp(HeartTree)
 ```
 
 ![](HeartFailure_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+
 Generate confusion matrix
 
 ``` r
