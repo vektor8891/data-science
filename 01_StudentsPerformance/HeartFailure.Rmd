@@ -4,26 +4,89 @@ author: "Viktor Szabo"
 output: rmarkdown::github_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+## Read in the data
+
+Source: https://www.kaggle.com/andrewmvd/heart-failure-clinical-data
+
+```{r}
+heart = read.csv("heart_failure_clinical_records_dataset.csv")
+heart$DEATH_EVENT = as.factor(heart$DEATH_EVENT)
+str(heart)
+```
+## Split the data
+
+```{r}
+library(caTools)
+set.seed(1)
+spl = sample.split(heart$DEATH_EVENT, SplitRatio = 0.7)
+Train = subset(heart, spl==TRUE)
+Test = subset(heart, spl==FALSE)
 ```
 
-## R Markdown
+Calculate baseline accuracy based on most frequent value:
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+```{r}
+max(table(heart$DEATH_EVENT)) / nrow(heart)
 ```
 
-## Including Plots
+## CART model
 
-You can also embed plots, for example:
+```{r}
+library(rpart)
+library(rpart.plot)
+HeartTree = rpart(DEATH_EVENT ~ ., data = Train, method="class", minbucket=5)
+prp(HeartTree)
+```
+Generate confusion matrix
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r}
+PredictCART = predict(HeartTree, newdata = Test, type = "class")
+confusionMatrix = table(Test$DEATH_EVENT, PredictCART)
+confusionMatrix
+```
+Calculate accuracy of CART model:
+
+```{r}
+sum(diag(confusionMatrix)) / nrow(Test)
+```
+## ROC curve
+
+```{r}
+library(ROCR)
+PredictROC = predict(HeartTree, newdata = Test)
+pred = prediction(PredictROC[,2], Test$DEATH_EVENT)
+perf = performance(pred, "tpr", "fpr")
+plot(perf)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+## Random Forests
+
+```{r message=FALSE}
+library(randomForest)
+HeartForest = randomForest(DEATH_EVENT ~ ., data = Train, ntree=200, nodesize=25 )
+PredictForest = predict(HeartForest, newdata = Test)
+```
+
+Calculate accuracy from confusion matrix:
+
+```{r}
+forestMatrix = table(Test$DEATH_EVENT, PredictForest)
+sum(diag(forestMatrix)) / nrow(Test)
+```
+## Cross-validation
+
+```{r message=FALSE}
+library(caret)
+library(e1071)
+numFolds = trainControl( method = "cv", number = 10 )
+cpGrid = expand.grid( .cp = seq(0.03,0.06,0.005)) 
+train(DEATH_EVENT ~ ., data = Train, method = "rpart", trControl = numFolds, tuneGrid = cpGrid )
+```
+Calculate accuracy of cross-validated CART-model:
+
+```{r}
+HeartTreeCV = rpart(DEATH_EVENT ~ ., data = Train, method="class", cp = 0.045)
+PredictCV = predict(HeartTreeCV, newdata = Test, type = "class")
+treeMatrixCV = table(Test$DEATH_EVENT, PredictForest)
+sum(diag(treeMatrixCV)) / nrow(Test)
+```
