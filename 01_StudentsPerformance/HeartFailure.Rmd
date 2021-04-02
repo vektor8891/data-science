@@ -1,7 +1,9 @@
 ---
 title: "Heart Failure Prediction"
 author: "Viktor Szabo"
-output: rmarkdown::github_document
+output:
+  md_document:
+    variant: markdown_github
 ---
 
 ## Read in the data
@@ -37,6 +39,7 @@ library(rpart.plot)
 HeartTree = rpart(DEATH_EVENT ~ ., data = Train, method="class", minbucket=5)
 prp(HeartTree)
 ```
+
 Generate confusion matrix
 
 ```{r}
