@@ -1,6 +1,6 @@
 # Data Science
 
-Collection of data science projects demonstrating skills and expertise
+Collection of data science projects.
 
 ## 1. Heart Failure
 
