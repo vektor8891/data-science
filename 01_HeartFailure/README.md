@@ -59,7 +59,7 @@ HeartTree = rpart(DEATH_EVENT ~ ., data = Train, method="class", minbucket=5)
 prp(HeartTree)
 ```
 
-![](HeartFailure_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
 
 Generate confusion matrix
 
@@ -92,7 +92,7 @@ perf = performance(pred, "tpr", "fpr")
 plot(perf)
 ```
 
-![](HeartFailure_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
 
 ## Random Forests
 

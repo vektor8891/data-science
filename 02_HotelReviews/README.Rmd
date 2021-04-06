@@ -1,0 +1,109 @@
+---
+title: "Hotel Review Analysis"
+author: "Viktor Szabo"
+output: rmarkdown::github_document
+---
+
+In this exercise, I use Natural Language Processing (NLP) to predict whether a hotel rating is positive (greater than 3 stars) based on Tripadvisor user reviews. Using various statistical methods - like CART and random forest - I managed to improve the baseline prediction accuracy (0.69) to 0.83.
+
+## Read in the data
+
+Source: https://www.kaggle.com/andrewmvd/trip-advisor-hotel-reviews
+
+```{r}
+reviews = read.csv("tripadvisor_hotel_reviews.csv", stringsAsFactors=FALSE)
+reviews$Positive = as.factor(reviews$Rating > 3)
+str(reviews)
+table(reviews$Positive)
+```
+
+Calculate baseline accuracy based on most frequent value:
+
+```{r}
+max(table(reviews$Positive)) / nrow(reviews)
+```
+
+## Create corpus
+
+```{r}
+library(tm)
+library(SnowballC)
+corpus = VCorpus(VectorSource(reviews$Review))
+corpus[[1]]$content
+```
+
+Transform text:
+
+```{r}
+# Convert to lower-case
+corpus = tm_map(corpus, content_transformer(tolower))
+# Remove punctuation
+corpus = tm_map(corpus, removePunctuation)
+# Remove stopwords and hotel
+corpus = tm_map(corpus, removeWords, c("hotel", stopwords("english")))
+# Stem document 
+corpus = tm_map(corpus, stemDocument)
+corpus[[1]]$content
+```
+
+## Create matrix
+
+```{r}
+frequencies = DocumentTermMatrix(corpus)
+sparse = removeSparseTerms(frequencies, 0.95)
+reviewSparse = as.data.frame(as.matrix(sparse))
+# Make all variable names R-friendly
+colnames(reviewSparse) = make.names(colnames(reviewSparse))
+# Add dependent variable
+reviewSparse$PositiveRating = reviews$Positive
+```
+
+## Split the data
+
+```{r}
+library(caTools)
+set.seed(123)
+split = sample.split(reviewSparse$PositiveRating, SplitRatio = 0.7)
+trainSparse = subset(reviewSparse, split==TRUE)
+testSparse = subset(reviewSparse, split==FALSE)
+```
+
+## CART model
+
+```{r}
+library(rpart)
+library(rpart.plot)
+reviewCART = rpart(PositiveRating ~ ., data=trainSparse, method="class", minbucket = 15)
+prp(reviewCART)
+```
+
+Generate confusion matrix
+
+```{r}
+predictCART = predict(reviewCART, newdata=testSparse, type="class")
+confusionMatrix = table(testSparse$PositiveRating, predictCART)
+confusionMatrix
+```
+
+Calculate accuracy of CART model:
+
+```{r}
+sum(diag(confusionMatrix)) / nrow(testSparse)
+```
+
+## Random Forests
+
+```{r message=FALSE}
+library(randomForest)
+set.seed(1)
+reviewRF = randomForest(PositiveRating ~ ., data=trainSparse)
+predictRF = predict(reviewRF, newdata=testSparse)
+```
+
+Calculate accuracy from confusion matrix:
+
+```{r}
+confusionMatrixRF = table(testSparse$PositiveRating, predictRF)
+confusionMatrixRF
+sum(diag(confusionMatrixRF)) / nrow(testSparse)
+```

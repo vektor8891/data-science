@@ -7,3 +7,9 @@ Collection of data science projects.
 **Summary**: Predict heart failure based on medical conditions.
 
 **Tags**: CART, Random Forest, Cross-Validation, ROC Curve
+
+## [2. Hotel Reviews](02_HotelReviews)
+
+**Summary**: Predict ratings based on Tripadvisor user reviews.
+
+**Tags**: NLP, CART, Random Forest
