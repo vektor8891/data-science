@@ -13,7 +13,6 @@ Collection of data science projects.
 
 **Language**: `R`
 
-<br />
 </div>
 
 <div style="clear:both">
