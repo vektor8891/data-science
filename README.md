@@ -4,7 +4,7 @@ Collection of data science projects.
 
 ## [1. Heart Failure](01_HeartFailure)
 
-<img style="float: right; width: 300px" src="https://afmc.org/wp-content/uploads/2017/02/heartfailure.jpg">
+<img style="float: right;" width=300 src="https://afmc.org/wp-content/uploads/2017/02/heartfailure.jpg">
 
 **Summary**: Predict heart failure based on medical conditions.
 
@@ -12,7 +12,7 @@ Collection of data science projects.
 
 ## [2. Hotel Reviews](02_HotelReviews)
 
-<img style="float: right; width: 300px" src="https://static.tacdn.com/img2/branding/rebrand/TA_brand_logo.png">
+<img style="float: right;" width=300 src="https://static.tacdn.com/img2/branding/rebrand/TA_brand_logo.png">
 
 **Summary**: Predict ratings based on Tripadvisor user reviews.
 
@@ -20,7 +20,7 @@ Collection of data science projects.
 
 ## [3. Image Classifier](03_CatDogMouse/CatDogMouse.ipynb)
 
-<img style="float: right; width: 300px" src="https://www.neatorama.com/images/2007-05/dog-cat-mouse.jpg">
+<img style="float: right;" width=300 src="https://www.neatorama.com/images/2007-05/dog-cat-mouse.jpg">
 
 **Summary**: Classify images of cats, dogs and mouses using convolutional neural networks.
 
