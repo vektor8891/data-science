@@ -51,7 +51,7 @@ frequencies
 
 
 # Remove sparse terms
-sparse = removeSparseTerms(frequencies, 0.95)
+sparse = removeSparseTerms(frequencies, 0.995)
 sparse
 
 # Convert to a data frame
@@ -94,7 +94,7 @@ prp(reviewCART)
 predictCART = predict(reviewCART, newdata=testSparse, type="class")
 
 confusionMatrix = table(testSparse$UserRating, predictCART)
-confusionMatrix
+
 # Compute accuracy
 sum(diag(confusionMatrix)) / nrow(testSparse)
 
@@ -108,12 +108,13 @@ max(table(reviews$Rating)) / nrow(reviews)
 library(randomForest)
 set.seed(1)
 
-reviewRF = randomForest(UserRating ~ ., data=trainSparse)
+tweetRF = randomForest(UserRating ~ ., data=trainSparse)
 
 # Make predictions:
-predictRF = predict(reviewRF, newdata=testSparse)
+predictRF = predict(tweetRF, newdata=testSparse)
 
-confusionMatrixRF = table(testSparse$Rating, predictRF)
-confusionMatrixRF
-# Compute accuracy
-sum(diag(confusionMatrixRF)) / nrow(testSparse)
+table(testSparse$Negative, predictRF)
+
+# Accuracy:
+(293+21)/(293+7+34+21)
+
