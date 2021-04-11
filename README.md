@@ -13,3 +13,9 @@ Collection of data science projects.
 **Summary**: Predict ratings based on Tripadvisor user reviews.
 
 **Tags**: NLP, CART, Random Forest
+
+## [3. Image Classifier](03_CatDogMouse/CatDogMouse.ipynb)
+
+**Summary**: Classify images of cats, dogs and mouses using convolutional neural networks.
+
+**Tags**: CNN, Deep Learning, FastAI
