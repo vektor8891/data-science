@@ -9,7 +9,9 @@ Collection of data science projects.
 
 **Summary**: Predict heart failure based on medical conditions.
 
-**Tags**: CART, Random Forest, Cross-Validation, ROC Curve
+**Tags**: `CART`, `Random Forest`, `Cross-Validation`, `ROC Curve`
+
+**Language**: `R`
 
 <br />
 </div>
@@ -21,7 +23,9 @@ Collection of data science projects.
 
 **Summary**: Predict ratings based on Tripadvisor user reviews.
 
-**Tags**: NLP, CART, Random Forest
+**Tags**: `NLP`, `CART`, `Random Forest`
+
+**Language**: `R`
 
 </div>
 <div style="clear:both">
@@ -31,7 +35,9 @@ Collection of data science projects.
 
 **Summary**: Classify images of cats, dogs and mouses using convolutional neural networks.
 
-**Tags**: CNN, Deep Learning, FastAI
+**Tags**: `CNN`, `Deep Learning`, `FastAI`
+
+**Language**: `Python`
 
 <br />
 </div>
