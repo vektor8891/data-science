@@ -45,7 +45,7 @@ Collection of data science projects.
 <div style="clear:both">
 <img align="right" width=150 src="https://www.neatorama.com/images/2007-05/dog-cat-mouse.jpg">
 
-**Summary**: Classify images of cats, dogs and mouses using convolutional neural networks. To use the live version of this model by clicking here (**WARNING**: It might take 1-2 minutes to launch the session):
+**Summary**: Classify images of cats, dogs and mouses using convolutional neural networks. To use the live version of this model click the below button (**WARNING**: It might take 1-2 minutes to launch the session):
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/vektor8891/animal-voila/HEAD?urlpath=%2Fvoila%2Frender%2Fanimal_classifier.ipynb)
 
